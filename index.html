@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    *{
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+    .all{
+        background: url(https://images.unsplash.com/photo-1731640275202-28a40f7edd04?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxmZWF0dXJlZC1waG90b3MtZmVlZHw3fHx8ZW58MHx8fHx8)no-repeat center center/cover;
+        display: grid;
+        place-content: center;
+        align-items: center;
+        min-height: 100vh;
+    }
+    .clock{
+        display: flex;
+        text-align: center;
+        font-size: 1.5rem;
+    }
+    .clock > div{
+        background: rgba(16, 16, 141, 0.8);
+        margin: 0 20px;
+        color: #fff;
+        padding: 25px;
+        border-radius: 8px;
+    }
+    #am_pm{
+        color: #fff;
+        position: relative;
+        top: 65px;
+    }
+    .date{
+        display: flex;
+        text-align: center;
+        font-size: 1.5rem;
+        margin: 10px 0 0 0;
+    }
+    .date > div{
+        background: rgba(16, 16, 141, 0.8);
+        margin: 0 20px;
+        color: #fff;
+        padding: 70px;
+        border-radius: 8px;
+    }
+    @media screen and (min-width:0) and (max-width:750px) {
+        .clock{
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+        }
+        .clock > div{
+            width: 150px;
+        }
+        .date > div{
+            padding: 25px;
+            margin: 0 15px;
+        }
+        #am_pm{
+            top: -75px;
+            right: -300px;
+        }
+    }
+</style>
+<body>
+    <div class="all">
+        <div class="clock">
+            <div class="hours">
+                <p id="hours">00</p>
+                <span>Hours</span>
+            </div>
+            <div class="minutes">
+                <p id="minutes">00</p>
+                <span>minutes</span>
+            </div>
+            <div class="seconds">
+                <p id="seconds">00</p>
+                <span>Seconds</span>
+            </div>
+            <div>
+                <p id="miliseconds">00</p>
+                <span>Miliseconds</span>
+            </div>
+            <small id="am_pm"></small>
+            <!-- <div class="am/pm">
+
+        </div> -->
+         </div>
+         <div class="date">
+            <div class="day">
+                <p id="day">00</p>
+                <span>Day</span>
+            </div>
+            <div class="month">
+                <p id="month">00</p>
+                <span>Month</span>
+            </div>
+            <div class="year">
+                <p id="year">00</p>
+                <span>Year</span>
+            </div>
+         </div>
+    </div>
+</body>
+<script>
+let hours = document.getElementById("hours");
+let minutes = document.getElementById("minutes");
+let seconds = document.getElementById("seconds");
+let miliseconds = document.getElementById("miliseconds")
+let am_pm = document.getElementById("am_pm");
+let day = document.getElementById("day");
+let month = document.getElementById("month");
+let year = document.getElementById("year");
+
+let time = "AM";
+
+let updatetime = () => {
+    let current_Date = new Date();
+
+    let current_Hour = current_Date.getHours();
+    let current_Minute = current_Date.getMinutes();
+    let current_Second = current_Date.getSeconds();
+    let current_Milisecond = current_Date.getMilliseconds();
+    let current_Day = current_Date.getDate();
+    let current_Month = current_Date.getMonth() + 1;
+    let current_Year = current_Date.getFullYear();
+
+    if (current_Hour > 12) {
+        time = "PM";
+        am_pm.textContent = time;
+    }else {
+        am_pm.textContent = time;
+    };
+
+    // current_Hour = current_Hour < 10 ? + "0" 
+
+    hours.textContent = current_Hour;
+    minutes.textContent = current_Minute;
+    seconds.textContent = current_Second;
+    miliseconds.textContent = current_Milisecond
+    day.textContent = current_Day;
+    month.textContent = current_Month;
+    year.textContent = current_Year;
+
+  
+    setTimeout(() => {
+        updatetime()
+    }, 1000)
+};
+
+updatetime()
+</script>
+</html>
